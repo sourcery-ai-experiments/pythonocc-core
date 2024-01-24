@@ -26,11 +26,13 @@ requirements:
 
   host:
     - python {{ python }}
+    - backports
     - occt ==7.7.2
     - numpy >=1.17
 
   run:
     - occt ==7.7.2
+    - backports
     - six
     - numpy >=1.17
 
