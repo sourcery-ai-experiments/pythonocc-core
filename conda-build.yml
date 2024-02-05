@@ -45,7 +45,7 @@ jobs:
       displayName: 'Windows force 32 bit build'
 
   - bash: conda create --yes --quiet --name build_env conda-build conda-verify libarchive python=${{ parameters.py_maj }}.${{ parameters.py_min }} anaconda-client
-    displayName: Create Anaconda environment
+    displayName: 'Create Anaconda environment'
     
   - bash: |
       source activate build_env && \
@@ -57,3 +57,10 @@ jobs:
       PYTHON_VERSION: ${{ parameters.py_maj }}.${{ parameters.py_min }}
       PACKAGE_VERSION: $(Build.SourceBranchName)
       TOKEN: $(anaconda.TOKEN)
+
+  - bash: |
+      source activate build_env && \
+      pip install pytest && \
+      cd test && \
+      pytest
+    displayName: 'Unitests using pytest'  
